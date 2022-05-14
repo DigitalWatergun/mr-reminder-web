@@ -10,28 +10,30 @@ export const RemindersPage = () => {
     const [user] = useState(JSON.parse(sessionStorage.getItem("user")));
     const navigate = useNavigate();
 
-    const callBackendAPI = async () => {
-        console.log("Calling backend Reminders API...");
-
-        const response = await api.getAllReminders();
-        if (response.status === 200) {
-            const reminders = convertRemindersToLocal(response.data);
-            setReminders(reminders);
-        } else if (
-            response.response.status === 401 ||
-            response.response.status === 403
-        ) {
-            console.log(response.response.data);
-            sessionStorage.clear();
-            navigate("/", { state: { message: "Session expired" } });
-        }
-    };
-
     const handleCreateClick = () => {
         navigate("/reminders/create");
     };
 
-    useEffect(callBackendAPI, []);
+    useEffect(() => {
+        const callBackendAPI = async () => {
+            console.log("Calling backend Reminders API...");
+            const response = await api.getAllReminders();
+            if (response.status === 200) {
+                const reminders = convertRemindersToLocal(response.data);
+                setReminders(reminders);
+            } else if (
+                response.response.status === 401 ||
+                response.response.status === 403
+            ) {
+                console.log(response.response.data);
+                sessionStorage.clear();
+                navigate("/", { state: { message: "Session expired" } });
+            }
+        };
+
+        callBackendAPI();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
 
     return (
         <HeaderFooter userState={true} user={user}>

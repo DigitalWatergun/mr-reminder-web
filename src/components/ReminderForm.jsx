@@ -105,7 +105,7 @@ export const ReminderForm = (props) => {
             value = event.target.checked;
             if (event.target.checked) {
                 setFormData((items) => {
-                    return { ...items, ["dateEnable"]: true };
+                    return { ...items, dateEnable: true };
                 });
             } else {
                 removeData(["time"]);
@@ -118,8 +118,8 @@ export const ReminderForm = (props) => {
                 setFormData((items) => {
                     return {
                         ...items,
-                        ["dateEnable"]: false,
-                        ["timeEnable"]: false,
+                        dateEnable: false,
+                        timeEnable: false,
                     };
                 });
             } else {

@@ -13,7 +13,7 @@ export const Reminder = (props) => {
             setExpandState(true);
             setExpand(<ReminderDetails data={props.data} />);
         }
-    }, [expandState, expand]);
+    }, [expandState, props.data]);
 
     return (
         <div className="reminder">

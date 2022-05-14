@@ -14,7 +14,7 @@ export const Profile = (props) => {
             setExpandState(true);
             setExpand(<ProfileDetails user={user} />);
         }
-    }, [expandState, expand]);
+    }, [expandState, user]);
 
     return (
         <div>

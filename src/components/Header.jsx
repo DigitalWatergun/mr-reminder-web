@@ -7,19 +7,17 @@ export const Header = (props) => {
     const [user] = useState(props.user);
     const [profile, setProfile] = useState();
 
-    const renderProfile = () => {
+    useEffect(() => {
         if (userState) {
             setProfile(<Profile user={user} />);
         } else {
             setProfile(undefined);
         }
-    };
-
-    useEffect(renderProfile, []);
+    }, [user, userState]);
 
     return (
         <div className="header">
-            <img src={image} height="50" width="60"></img>
+            <img src={image} alt="icon" height="50" width="60"></img>
             <p className="headerTitle">Mr. Reminder</p>
             {profile}
         </div>

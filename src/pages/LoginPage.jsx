@@ -76,6 +76,7 @@ export const Login = () => {
                         width="120"
                         height="100"
                         src={image}
+                        alt="logo"
                     ></img>
                     <div className="formBoxes">
                         <form className="customForm">

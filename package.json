@@ -1,5 +1,5 @@
 {
-  "name": "mr-reminder-api",
+  "name": "mr-reminder-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

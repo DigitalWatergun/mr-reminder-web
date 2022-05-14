@@ -38,7 +38,8 @@ export const GoogleButton = () => {
             window.google.accounts.id.cancel();
             document.getElementById("google-client-script").remove();
         };
-    }, [scriptLoaded, divRef.current, window]);
+        // }, [scriptLoaded, divRef.current, window]);
+    }, [scriptLoaded]);
 
     return <div ref={divRef} />;
 };

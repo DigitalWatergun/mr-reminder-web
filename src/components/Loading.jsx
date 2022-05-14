@@ -12,7 +12,7 @@ export const Loading = () => {
                 minHeight: "100vh",
             }}
         >
-            <img width="25" height="25" src={loading} />
+            <img width="25" height="25" src={loading} alt="loading_img" />
         </div>
     );
 };
