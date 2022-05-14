@@ -14,17 +14,28 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "lint": "eslint . --ext .js --ext .jsx",
+    "lint-fix": "eslint . --ext .js --ext .jsx --fix"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "lint-staged": {
+    "*.{js,jsx}": "eslint . --ext .js --ext .jsx"
   },
   "browserslist": {
     "production": [
