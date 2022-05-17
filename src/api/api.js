@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASEURL = "http://localhost:3001";
-// const BASEURL = "https://api.mrreminder.xyz"
+const BASEURL = process.env.REACT_APP_API_ENDPOINT;
 
 const axiosInstance = axios.create({
     baseURL: BASEURL,
