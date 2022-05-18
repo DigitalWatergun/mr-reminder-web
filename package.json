@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
@@ -15,15 +16,29 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.12",
+    "@babel/plugin-transform-runtime": "^7.17.12",
+    "@babel/preset-env": "^7.17.12",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.1",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0",
+    "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,7 +47,12 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "eslint . --ext .js --ext .jsx",
-    "lint-fix": "eslint . --ext .js --ext .jsx --fix"
+    "lint-fix": "eslint . --ext .js --ext .jsx --fix",
+    "build:dev": "webpack-cli --env mode=development --config ./webpack.config.js",
+    "build:prod": "webpack-cli --env mode=production --config ./webpack.config.js",
+    "start:dev": "npm run build:dev && node ./dist/server.bundle.js",
+    "start:prod": "node dist/server.bundle.js",
+    "start:test": "webpack-cli serve --config ./webpack.config.js --mode development"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint . --ext .js --ext .jsx"
