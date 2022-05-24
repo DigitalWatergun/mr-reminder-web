@@ -1,5 +1,6 @@
-const nodeExternals = require("webpack-node-externals");
 const path = require("path");
+const nodeExternals = require("webpack-node-externals");
+const NodemonPlugin = require("nodemon-webpack-plugin");
 
 module.exports = (env) => {
     const config = {
@@ -10,7 +11,7 @@ module.exports = (env) => {
         target: "node",
         externals: [nodeExternals()],
         module: {},
-        plugins: [],
+        plugins: [new NodemonPlugin()],
         output: {
             filename: "[name].bundle.js",
             path: path.resolve(__dirname, "dist"),
