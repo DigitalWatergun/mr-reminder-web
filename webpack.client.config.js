@@ -6,7 +6,7 @@ module.exports = (env) => {
         entry: {
             client: "./src/index.js",
         },
-        devtool: env.mode === "development" ? "inline-source-map" : undefined,
+        devtool: env.mode === "development" ? "source-map" : undefined,
         mode: env.mode,
         module: {
             rules: [

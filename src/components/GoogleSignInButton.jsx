@@ -24,7 +24,6 @@ export const GoogleButton = (props) => {
                     };
 
                     const response = await api.loginUser(loginData);
-                    console.log(response);
                     if (response.status === 200) {
                         const stringResponse = JSON.stringify(response.data);
                         sessionStorage.setItem("user", stringResponse);
