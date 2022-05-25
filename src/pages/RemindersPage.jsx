@@ -20,6 +20,7 @@ export const RemindersPage = () => {
             const response = await api.getAllReminders();
             if (response.status === 200) {
                 const reminders = convertRemindersToLocal(response.data);
+                console.log(reminders);
                 setReminders(reminders);
             } else if (
                 response.response.status === 401 ||

@@ -8,6 +8,7 @@ dotenv.config();
 const PORT = process.env.EXPRESS_SERVER_PORT;
 const NODE_ENV = process.env.NODE_ENV;
 const API_BASE_URL = process.env.API_BASE_URL;
+const GOOGLE_OAUTH_CLIENT_ID = process.env.GOOGLE_OAUTH_CLIENT_ID;
 
 const readFileAsync = promisify(fs.readFile);
 
@@ -23,6 +24,10 @@ const main = () => {
         );
         html = html.replace(/{{__API_BASE_URL__}}/g, API_BASE_URL);
         html = html.replace(/{{__NODE_ENV__}}/g, NODE_ENV);
+        html = html.replace(
+            /{{__GOOGLE_OAUTH_CLIENT_ID__}}/g,
+            GOOGLE_OAUTH_CLIENT_ID
+        );
         res.send(html);
     });
 

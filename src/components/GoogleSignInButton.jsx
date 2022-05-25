@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import { api } from "../api/api";
 
-export const GoogleButton = () => {
+export const GoogleButton = (props) => {
     const [scriptLoaded, setScriptLoaded] = useState(false);
     const divRef = useRef(null);
     useEffect(() => {
@@ -11,13 +12,28 @@ export const GoogleButton = () => {
 
             setScriptLoaded(true);
             window.google.accounts.id.initialize({
-                client_id: "",
+                client_id: window.GOOGLE_OAUTH_CLIENT_ID,
                 callback: async (res, error) => {
                     if (error) {
                         console.log(error);
                     }
-                    console.log(res);
-                    // send res.credentials to backend for validation
+
+                    const loginData = {
+                        authType: "google",
+                        data: res,
+                    };
+
+                    const response = await api.loginUser(loginData);
+                    console.log(response);
+                    if (response.status === 200) {
+                        const stringResponse = JSON.stringify(response.data);
+                        sessionStorage.setItem("user", stringResponse);
+                        sessionStorage.setItem("isAuthenticated", true);
+                        props.navigate("/reminders");
+                    } else {
+                        props.setLoadingState(false);
+                        props.setError(response.response.data);
+                    }
                 },
             });
             window.google.accounts.id.renderButton(divRef.current, {
@@ -39,7 +55,7 @@ export const GoogleButton = () => {
             document.getElementById("google-client-script").remove();
         };
         // }, [scriptLoaded, divRef.current, window]);
-    }, [scriptLoaded]);
+    }, [props, scriptLoaded]);
 
     return <div ref={divRef} />;
 };

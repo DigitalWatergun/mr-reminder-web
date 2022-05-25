@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
-// import { GoogleButton } from "../components/GoogleSignInButton"
+import { GoogleButton } from "../components/GoogleSignInButton";
 import { api } from "../api/api";
 import image from "../static/sticky.png";
 
@@ -33,12 +33,15 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoadingState(true);
-        const data = {
-            username: formData.username,
-            password: formData.password,
-            registerHash: formData.registerHash,
+        const loginData = {
+            authType: "local",
+            data: {
+                username: formData.username,
+                password: formData.password,
+                registerHash: formData.registerHash,
+            },
         };
-        const response = await api.loginUser(data);
+        const response = await api.loginUser(loginData);
         if (response.status === 200) {
             const stringResponse = JSON.stringify(response.data);
             sessionStorage.setItem("user", stringResponse);
@@ -106,8 +109,20 @@ export const Login = () => {
                                 Sign In
                             </button>
                             <a href="/register">Need an account? Register</a>
-                            {/* <p style={{ fontSize: 13, fontWeight: "regular", textAlign: "center" }}>or</p> */}
-                            {/* <GoogleButton/> */}
+                            <p
+                                style={{
+                                    fontSize: 13,
+                                    fontWeight: "regular",
+                                    textAlign: "center",
+                                }}
+                            >
+                                or
+                            </p>
+                            <GoogleButton
+                                navigate={navigate}
+                                setLoadingState={setLoadingState}
+                                setError={setError}
+                            />
                         </form>
                     </div>
                 </div>
