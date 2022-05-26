@@ -24,14 +24,13 @@ body {
     background-color: #FFC36A;
     border: 0;
     border-radius: 7px;
-    color: #414141;
     font-weight: bold;
     padding: 8px; 
     transition-duration: 0.4s;
     width: 140px; 
 }
 
-.buttonOrange:hover, .customForm .buttonSignIn:hover, .reminderCreateButton:hover, .reminderRunButton:hover:enabled {
+.buttonOrange:hover:enabled, .customForm .buttonSignIn:hover, .reminderCreateButton:hover, .reminderRunButton:hover:enabled {
     background-color: white;
     color: #FFC36A;
 }

@@ -16,7 +16,11 @@ export const ChangePassword = () => {
     const [formData, setFormData] = useState(() => {
         if (sessionStorage.getItem("user")) {
             const user = JSON.parse(sessionStorage.getItem("user"));
-            return { userId: user.userId, changePassword: user.changePassword };
+            return {
+                userId: user.userId,
+                changePassword: user.changePassword,
+                type: user.type,
+            };
         }
     });
     const [loadingState, setLoadingState] = useState(false);
@@ -107,7 +111,11 @@ export const ChangePassword = () => {
                             ></input>
                             <br />
                             <br />
-                            <div className="errorText">{error}</div>
+                            <div className="errorText">
+                                {formData.type === "google"
+                                    ? "This account is managed by Google"
+                                    : error}
+                            </div>
                             <br />
                             {changePassword ? (
                                 <Link to="/">
@@ -132,6 +140,7 @@ export const ChangePassword = () => {
                                 className="buttonOrange"
                                 style={{ float: "right" }}
                                 onClick={handleUpdateClick}
+                                disabled={formData.type === "google"}
                             >
                                 Update
                             </button>
