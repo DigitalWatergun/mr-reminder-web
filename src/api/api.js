@@ -67,8 +67,8 @@ const resetPassword = async (data) => {
     return await apiHelper("post", "/users/reset", data);
 };
 
-const deleteUser = async (data) => {
-    return await apiHelper("delete", "/users", data);
+const deleteUser = async () => {
+    return await apiHelper("delete", "/users");
 };
 
 const getAllReminders = async () => {

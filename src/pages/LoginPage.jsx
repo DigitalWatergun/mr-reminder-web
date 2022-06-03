@@ -45,10 +45,10 @@ export const Login = () => {
         if (response.status === 200) {
             const stringResponse = JSON.stringify(response.data);
             sessionStorage.setItem("user", stringResponse);
-            sessionStorage.setItem("isAuthenticated", true);
             navigate("/reminders");
         } else if (response.response.status === 401) {
             setLoadingState(false);
+            setFormData({});
             setError(response.response.data);
             setActive(
                 <div>

@@ -7,7 +7,7 @@ export const EditReminderPage = () => {
     const browserState = useLocation();
     const navigate = useNavigate();
     const [data] = useState(() => {
-        if (!browserState.state) return {};
+        if (!browserState.state) return undefined;
         return browserState.state.data;
     });
 

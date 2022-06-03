@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
@@ -17,7 +17,6 @@ export const ChangePassword = () => {
     const [formData, setFormData] = useState(() => {
         if (user) {
             return {
-                userId: user.userId,
                 changePassword: user.changePassword,
                 type: user.type,
             };
@@ -75,11 +74,6 @@ export const ChangePassword = () => {
             }
         }
     };
-
-    useEffect(() => {
-        if (!user) navigate("/");
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user]);
 
     return (
         <HeaderFooter>

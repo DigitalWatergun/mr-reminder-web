@@ -15,8 +15,6 @@ export const RemindersPage = () => {
     };
 
     useEffect(() => {
-        if (!user) navigate("/");
-
         const callBackendAPI = async () => {
             console.log("Calling backend Reminders API...");
             const response = await api.getAllReminders();
@@ -45,7 +43,7 @@ export const RemindersPage = () => {
 
         callBackendAPI();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user]);
+    }, []);
 
     return (
         <HeaderFooter userState={true} user={user}>

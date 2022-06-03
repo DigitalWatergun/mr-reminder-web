@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter.jsx";
 import { api } from "../api/api";
 
 export const Settings = () => {
-    const [user] = useState(JSON.parse(sessionStorage.getItem("user")));
     const navigate = useNavigate();
 
     const handleChangePasswordClick = () => {
@@ -12,21 +11,14 @@ export const Settings = () => {
     };
 
     const handleDeleteClick = async () => {
-        const userId = JSON.parse(sessionStorage.getItem("user"))["userId"];
-        const data = { userId: userId };
-        await api.deleteUser(data);
+        await api.deleteUser();
         sessionStorage.clear();
-        navigate("/");
+        navigate("/", { state: { message: "Account has been deleted" } });
     };
 
     const handleBackClick = () => {
         navigate("/reminders");
     };
-
-    useEffect(() => {
-        if (!user) navigate("/");
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user]);
 
     return (
         <HeaderFooter>
