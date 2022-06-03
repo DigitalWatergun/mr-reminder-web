@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter.jsx";
 import { api } from "../api/api";
 
 export const Settings = () => {
+    const [user] = useState(JSON.parse(sessionStorage.getItem("user")));
     const navigate = useNavigate();
 
     const handleChangePasswordClick = () => {
@@ -21,6 +22,11 @@ export const Settings = () => {
     const handleBackClick = () => {
         navigate("/reminders");
     };
+
+    useEffect(() => {
+        if (!user) navigate("/");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
 
     return (
         <HeaderFooter>

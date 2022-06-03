@@ -15,6 +15,8 @@ export const RemindersPage = () => {
     };
 
     useEffect(() => {
+        if (!user) navigate("/");
+
         const callBackendAPI = async () => {
             console.log("Calling backend Reminders API...");
             const response = await api.getAllReminders();

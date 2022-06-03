@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
 import { api } from "../api/api";
 
 export const ChangePassword = () => {
+    const [user] = useState(JSON.parse(sessionStorage.getItem("user")));
     const state = useLocation();
     const [changePassword] = useState(() => {
         if (state.state === null) {
@@ -14,13 +15,14 @@ export const ChangePassword = () => {
         }
     });
     const [formData, setFormData] = useState(() => {
-        if (sessionStorage.getItem("user")) {
-            const user = JSON.parse(sessionStorage.getItem("user"));
+        if (user) {
             return {
                 userId: user.userId,
                 changePassword: user.changePassword,
                 type: user.type,
             };
+        } else {
+            return {};
         }
     });
     const [loadingState, setLoadingState] = useState(false);
@@ -73,6 +75,11 @@ export const ChangePassword = () => {
             }
         }
     };
+
+    useEffect(() => {
+        if (!user) navigate("/");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
 
     return (
         <HeaderFooter>

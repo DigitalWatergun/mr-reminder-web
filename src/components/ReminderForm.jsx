@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { convertRemindersToUTC } from "../conversion/convertReminders";
 import { api } from "../api/api";
@@ -63,6 +63,7 @@ const RepeatInput = (props) => {
 };
 
 export const ReminderForm = (props) => {
+    const [user] = useState(JSON.parse(sessionStorage.getItem("user")));
     const [editState] = useState(() => {
         if (props.editState) {
             return props.editState;
@@ -74,9 +75,8 @@ export const ReminderForm = (props) => {
         if (props.data) {
             return props.data;
         } else {
-            return {
-                userId: JSON.parse(sessionStorage.getItem("user")).userId,
-            };
+            if (user) return { userId: user.userId };
+            return {};
         }
     });
     const [error, setError] = useState(undefined);
@@ -172,6 +172,14 @@ export const ReminderForm = (props) => {
             }
         }
     };
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/");
+        }
+        console.log(user);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
 
     return (
         <div>

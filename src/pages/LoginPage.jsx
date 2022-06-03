@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
-import { GoogleButton } from "../components/GoogleSignInButton";
+// import { GoogleButton } from "../components/GoogleSignInButton";
 import { api } from "../api/api";
 import image from "../static/sticky.png";
 
@@ -109,7 +109,7 @@ export const Login = () => {
                                 Sign In
                             </button>
                             <a href="/register">Need an account? Register</a>
-                            <p
+                            {/* <p
                                 style={{
                                     fontSize: 13,
                                     fontWeight: "regular",
@@ -122,7 +122,7 @@ export const Login = () => {
                                 navigate={navigate}
                                 setLoadingState={setLoadingState}
                                 setError={setError}
-                            />
+                            /> */}
                         </form>
                     </div>
                 </div>
