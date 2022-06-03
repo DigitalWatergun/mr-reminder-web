@@ -1,4 +1,4 @@
-const apiResponseHandler = (res, navigate) => {
+const apiResponseHandler = (res, navigate, setError) => {
     const response = res.response;
     let message;
     if (response.status === 401 || response.status === 403) {
@@ -8,9 +8,11 @@ const apiResponseHandler = (res, navigate) => {
         } else {
             message = response.data;
         }
+        sessionStorage.clear();
+        navigate("/", { state: { message } });
+    } else {
+        setError(response.data);
     }
-    sessionStorage.clear();
-    navigate("/", { state: { message } });
 };
 
 export { apiResponseHandler };

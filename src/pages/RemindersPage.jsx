@@ -25,24 +25,6 @@ export const RemindersPage = () => {
             } else {
                 apiResponseHandler(response, navigate);
             }
-            // } else if (
-            //     response.response.status === 401 ||
-            //     response.response.status === 403
-            // ) {
-            //     console.log(response.response.data);
-            //     let message;
-            //     if (response.response.data === "No token found.") {
-            //         message = "No token found or session expired.";
-            //     } else {
-            //         message = response.response.data;
-            //     }
-            //     sessionStorage.clear();
-            //     navigate("/", {
-            //         state: {
-            //             message: message,
-            //         },
-            //     });
-            // }
         };
 
         callBackendAPI();

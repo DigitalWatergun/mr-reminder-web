@@ -72,7 +72,7 @@ export const ReminderForm = (props) => {
         if (props.data) return props.data;
         return {};
     });
-    const [error] = useState(undefined);
+    const [error, setError] = useState(undefined);
     const navigate = useNavigate();
 
     const removeData = (item) => {
@@ -147,7 +147,7 @@ export const ReminderForm = (props) => {
         if (response.status === 200) {
             navigate("/reminders");
         } else {
-            apiResponseHandler(response, navigate);
+            apiResponseHandler(response, navigate, setError);
         }
     };
 
