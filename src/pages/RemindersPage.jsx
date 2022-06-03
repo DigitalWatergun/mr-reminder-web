@@ -4,6 +4,7 @@ import { Reminder } from "../components/Reminder";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { convertRemindersToLocal } from "../conversion/convertReminders.js";
 import { api } from "../api/api";
+import { apiResponseHandler } from "../api/apiResponseHandler";
 
 export const RemindersPage = () => {
     const [reminders, setReminders] = useState([]);
@@ -21,24 +22,27 @@ export const RemindersPage = () => {
             if (response.status === 200) {
                 const reminders = convertRemindersToLocal(response.data);
                 setReminders(reminders);
-            } else if (
-                response.response.status === 401 ||
-                response.response.status === 403
-            ) {
-                console.log(response.response.data);
-                let message;
-                if (response.response.data === "No token found.") {
-                    message = "No token found or session expired.";
-                } else {
-                    message = response.response.data;
-                }
-                sessionStorage.clear();
-                navigate("/", {
-                    state: {
-                        message: message,
-                    },
-                });
+            } else {
+                apiResponseHandler(response, navigate);
             }
+            // } else if (
+            //     response.response.status === 401 ||
+            //     response.response.status === 403
+            // ) {
+            //     console.log(response.response.data);
+            //     let message;
+            //     if (response.response.data === "No token found.") {
+            //         message = "No token found or session expired.";
+            //     } else {
+            //         message = response.response.data;
+            //     }
+            //     sessionStorage.clear();
+            //     navigate("/", {
+            //         state: {
+            //             message: message,
+            //         },
+            //     });
+            // }
         };
 
         callBackendAPI();

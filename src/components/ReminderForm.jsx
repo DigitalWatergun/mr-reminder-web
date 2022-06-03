@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { convertRemindersToUTC } from "../conversion/convertReminders";
 import { api } from "../api/api";
+import { apiResponseHandler } from "../api/apiResponseHandler";
 
 const DateInput = (props) => {
     return (
@@ -64,17 +65,14 @@ const RepeatInput = (props) => {
 
 export const ReminderForm = (props) => {
     const [editState] = useState(() => {
-        if (props.editState) {
-            return props.editState;
-        } else {
-            return false;
-        }
+        if (props.editState) return props.editState;
+        return false;
     });
     const [formData, setFormData] = useState(() => {
         if (props.data) return props.data;
         return {};
     });
-    const [error, setError] = useState(undefined);
+    const [error] = useState(undefined);
     const navigate = useNavigate();
 
     const removeData = (item) => {
@@ -139,32 +137,17 @@ export const ReminderForm = (props) => {
             reminder = convertRemindersToUTC(formData);
         }
 
+        let response;
         if (!editState) {
-            const response = await api.createReminder(reminder);
-            if (response.status === 200) {
-                navigate("/reminders");
-            } else if (
-                response.response.status === 401 ||
-                response.response.status === 403
-            ) {
-                sessionStorage.clear();
-                navigate("/", { state: { message: "Session expired" } });
-            } else {
-                setError(response.response.data);
-            }
+            response = await api.createReminder(reminder);
         } else {
-            const response = await api.editReminder(reminder);
-            if (response.status === 200) {
-                navigate("/reminders");
-            } else if (
-                response.response.status === 401 ||
-                response.response.status === 403
-            ) {
-                sessionStorage.clear();
-                navigate("/", { state: { message: "Session expired" } });
-            } else {
-                setError(response.response.data);
-            }
+            response = await api.editReminder(reminder);
+        }
+
+        if (response.status === 200) {
+            navigate("/reminders");
+        } else {
+            apiResponseHandler(response, navigate);
         }
     };
 
