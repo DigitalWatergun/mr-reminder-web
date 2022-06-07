@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
 import { api } from "../api/api";
+import { apiResponseHandler } from "../api/apiResponseHandler";
 
 export const ForgotPassword = () => {
     const [submitted, setSubmitted] = useState(false);
@@ -35,7 +36,7 @@ export const ForgotPassword = () => {
             setSubmitted(true);
         } else {
             setLoadingState(false);
-            setError(response.response.data);
+            apiResponseHandler(response, navigate, setError);
         }
     };
 
