@@ -33,6 +33,7 @@ module.exports = (env) => {
                 template: "./src/template/index.html",
                 filename: "index.html",
                 publicPath: "/static/",
+                favicon: "./src/static/favicon.ico",
             }),
         ],
         output: {
