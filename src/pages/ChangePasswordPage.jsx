@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
 import { api } from "../api/api";
+import { apiResponseHandler } from "../api/apiResponseHandler";
 
 export const ChangePassword = () => {
     const [user] = useState(JSON.parse(sessionStorage.getItem("user")));
@@ -48,30 +49,9 @@ export const ChangePassword = () => {
             navigate("/", {
                 state: { message: "Please log in with your new password." },
             });
-        } else if (
-            response.response.status === 401 ||
-            response.response.status === 403
-        ) {
-            sessionStorage.clear();
-            navigate("/", { state: { message: "Session expired" } });
         } else {
             setLoadingState(false);
-            if (response.response.data === "Password requirements not met") {
-                setError(
-                    <div>
-                        <p>The password needs to be:</p>
-                        <ul style={{ textAlign: "left" }}>
-                            <li>Between 8 and 32 characters</li>
-                            <li>Contain 1 Uppercase character</li>
-                            <li>Contain 1 Lowercase character</li>
-                            <li>Contain 1 Number</li>
-                            <li>Contain 1 special character</li>
-                        </ul>
-                    </div>
-                );
-            } else {
-                setError(response.response.data);
-            }
+            apiResponseHandler(response, navigate, setError);
         }
     };
 
