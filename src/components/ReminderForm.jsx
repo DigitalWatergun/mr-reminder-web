@@ -277,13 +277,17 @@ export const ReminderForm = (props) => {
                         </label>
                     </label>
                     {formData.enableSMS ? (
-                        <input
+                        <span className="smsDisabled">
+                            Disabled due to Twilio expenses 😭
+                        </span>
+                    ) : null}
+                    {/* <input
                             name="mobile"
                             type="tel"
                             value={formData.mobile || ""}
                             onChange={handleChange}
                         />
-                    ) : null}
+                    ) : null} */}
                     <br />
                     <br />
                     <div className="errorText">{error}</div>

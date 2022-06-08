@@ -386,3 +386,10 @@ body {
     margin: 0;
     padding: 20px 50px;
 }
+
+.smsDisabled {
+    color: red;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
