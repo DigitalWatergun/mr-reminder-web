@@ -9,6 +9,7 @@ import { Settings } from "./pages/SettingsPage";
 import { ChangePassword } from "./pages/ChangePasswordPage";
 import { Register } from "./pages/RegisterPage";
 import { ForgotPassword } from "./pages/ForgotPasswordPage";
+import { GoogleSignInRedirect } from "../src/components/GoogleSignInRedirect";
 
 const RequireAuth = ({ children }) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -76,6 +77,10 @@ export const Router = () => {
                 />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/resetpassword" element={<ChangePassword />} />
+                <Route
+                    path="/users/login/google"
+                    element={<GoogleSignInRedirect />}
+                />
                 <Route path="/*" element={<Error />} />
             </Routes>
         </BrowserRouter>

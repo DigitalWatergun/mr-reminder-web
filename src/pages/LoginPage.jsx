@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
-// import { GoogleButton } from "../components/GoogleSignInButton";
 import googleButton from "../static/googleButton.png";
 import { api } from "../api/api";
 import image from "../static/sticky.png";
@@ -11,9 +10,8 @@ const getGoogleOAuthURL = () => {
     const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
 
     const options = {
-        redirect_uri: "http://localhost:3001/users/login/google",
-        client_id:
-            "600753869347-gqrlgknlu5d44joi42k8balii8m6osg7.apps.googleusercontent.com",
+        redirect_uri: `${window.CLIENT_BASE_URL}/users/login/google`,
+        client_id: window.GOOGLE_OAUTH_CLIENT_ID,
         access_type: "offline",
         response_type: "code",
         prompt: "consent",
@@ -159,11 +157,6 @@ export const Login = () => {
                                     </div>
                                 </a>
                             </div>
-                            {/* <GoogleButton
-                                navigate={navigate}
-                                setLoadingState={setLoadingState}
-                                setError={setError}
-                            /> */}
                         </form>
                     </div>
                 </div>

@@ -47,6 +47,10 @@ const apiHelper = async (method, route, data) => {
     }
 };
 
+const loginWithGoogle = async (data) => {
+    return await apiHelper("post", "/users/login/google", data);
+};
+
 const registerUser = async (data) => {
     return await apiHelper("post", "/users", data);
 };
@@ -96,6 +100,7 @@ const stopReminder = async (data) => {
 };
 
 export const api = {
+    loginWithGoogle,
     registerUser,
     loginUser,
     logoutUser,
