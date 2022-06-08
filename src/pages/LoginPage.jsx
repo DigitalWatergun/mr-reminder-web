@@ -3,8 +3,30 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { HeaderFooter } from "../components/HeaderFooter";
 import { Loading } from "../components/Loading";
 // import { GoogleButton } from "../components/GoogleSignInButton";
+import googleButton from "../static/googleButton.png";
 import { api } from "../api/api";
 import image from "../static/sticky.png";
+
+const getGoogleOAuthURL = () => {
+    const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+
+    const options = {
+        redirect_uri: "http://localhost:3001/users/login/google",
+        client_id:
+            "600753869347-gqrlgknlu5d44joi42k8balii8m6osg7.apps.googleusercontent.com",
+        access_type: "offline",
+        response_type: "code",
+        prompt: "consent",
+        scope: [
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email",
+        ].join(" "),
+    };
+
+    const qs = new URLSearchParams(options);
+
+    return `${rootUrl}?${qs.toString()}`;
+};
 
 export const Login = () => {
     const state = useLocation();
@@ -109,7 +131,7 @@ export const Login = () => {
                                 Sign In
                             </button>
                             <a href="/register">Need an account? Register</a>
-                            {/* <p
+                            <p
                                 style={{
                                     fontSize: 13,
                                     fontWeight: "regular",
@@ -118,7 +140,26 @@ export const Login = () => {
                             >
                                 or
                             </p>
-                            <GoogleButton
+                            <div>
+                                <a
+                                    className="googleSignInBox"
+                                    href={getGoogleOAuthURL()}
+                                >
+                                    <div className="googleSignInButton">
+                                        <img
+                                            src={googleButton}
+                                            alt="googleSignInIcon"
+                                            style={{
+                                                width: "40px",
+                                            }}
+                                        />
+                                        <span className="googleSignInButtonText">
+                                            Sign In with Google
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            {/* <GoogleButton
                                 navigate={navigate}
                                 setLoadingState={setLoadingState}
                                 setError={setError}
