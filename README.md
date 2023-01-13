@@ -32,7 +32,7 @@ Settings Page:
 ![settings_page](https://github.com/DigitalWatergun/mr-reminder-web/blob/main/screenshots/mr_reminder_settings.png)
 
 Change Pass: 
-![change_pass](https://github.com/DigitalWatergun/mr-reminder-web/blob/main/screenshots/mr_reminder_change_pass)
+![change_pass](https://github.com/DigitalWatergun/mr-reminder-web/blob/main/screenshots/mr_reminder_change_pass.png)
 
 Register:
 ![register_page](https://github.com/DigitalWatergun/mr-reminder-web/blob/main/screenshots/mr_reminder_register.png)
